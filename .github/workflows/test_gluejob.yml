@@ -1,0 +1,28 @@
+name: Test GlueJobs
+
+on:
+  push:
+    branches:
+      - "feature/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache Docker Registry
+        uses: actions/cache@v3
+        with:
+          path: /tmp/docker-registry
+          key: docker-registry-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            docker-registry-${{ github.ref }}
+            docker-registry-
+      - name: prepare container
+        run: |
+          docker-compose up -d 
+      - name: test
+        run: |
+          bash run_tests.sh
+
