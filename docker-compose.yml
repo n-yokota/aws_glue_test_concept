@@ -1,3 +1,4 @@
+# こちらのdocker-composeファイルは、以下の記事を参考に作成しています。
 # 参考: https://future-architect.github.io/articles/20220428a/
 
 version: '3.5'
